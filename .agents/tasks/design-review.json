@@ -1,0 +1,62 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "id": "MEDIUM-1",
+      "severity": "MEDIUM",
+      "title": "/api/auth 404 fallback is named but not actionable",
+      "where": "§4 (Decision — api/ functions), §11.1 (Reconciliation of api/ + custom outputDirectory), AC-5",
+      "problem": "The entire OAuth feature depends on repo-root api/*.js deploying as functions while outputDirectory is _site. The design validates this only via AC-5 [B], but the stated fallback is self-admittedly a no-op rewrite plus 'relocate them' — relocation is unspecified (to where, and how do redirect_uri/base_url/callback-URL, which hard-code /api/callback, change to match). An implementer hitting a 404 has only a direction, not a decided recovery.",
+      "fix": "Specify a complete fallback config instead of a direction: if AC-5 404s, add to vercel.json \"functions\": { \"api/*.js\": { \"runtime\": \"@vercel/node@3.2.0\" } } using a fully-qualified version (not a truncated major), which cures the zero-config miss without triggering 'Function Runtimes must have a valid version' and needs no function relocation or OAuth URL change."
+    },
+    {
+      "id": "MEDIUM-2",
+      "severity": "MEDIUM",
+      "title": "Date-ordering justification rests on a false Jekyll behavior for custom collections",
+      "where": "§6.7 (Sorting & year-rendering decision), §8, §17, AC-6/AC-7",
+      "problem": "The design repeatedly claims the YYYY-MM-DD- filename prefix alone guarantees Jekyll gives the document a real Time and thus the sort order. That is a _posts-only behavior; Jekyll does not derive 'date' from a custom-collection (_papers) filename. Ordering and %Y actually work only because the required front-matter 'date:' is a YAML date. The outcome holds today (date is REQUIRED), but the documented rule is wrong and could mislead a future hand-author into omitting date:, breaking sort and %Y.",
+      "fix": "Correct the justification: ordering/%Y come solely from the REQUIRED front-matter date: (unquoted YYYY-MM-DD cast to Time); the filename prefix is a readability/URL convention only and Jekyll does not derive date from a custom-collection filename. State that every paper (Decap or hand-authored) must carry date: in front matter; verify via seed paper and AC-6/AC-7."
+    },
+    {
+      "id": "NIT-1",
+      "severity": "NIT",
+      "title": "Home-page HTML comment nodes dropped by the includes",
+      "where": "§6.1/§6.5 vs real index.html; AC-2",
+      "problem": "The real pages contain explanatory HTML comments that the includes/layouts omit. Rendering-irrelevant, but comments are not whitespace, so AC-2's 'matching the current hand-written home page' is slightly broader than delivered.",
+      "fix": "Add to §6's allowed-differences list: '(d) HTML comment nodes present in the current files may be dropped — they do not affect rendering.'"
+    },
+    {
+      "id": "NIT-2",
+      "severity": "NIT",
+      "title": "Paper-body link underline is new styling vs existing links",
+      "where": "§7.3 (.paper-body a { text-decoration: underline; })",
+      "problem": "Existing notebook links (.toc-item a, .back-link) use text-decoration: none; paper-body links will be underlined — a new visual treatment. Confined to .paper-body so NFR-2 holds, but worth calling out so it isn't mistaken for the no-restyle invariant leaking.",
+      "fix": "Note in §7.3/§7.4 that underlined paper-body links are a deliberate prose-convention choice confined to .paper-body and do not touch existing link selectors."
+    },
+    {
+      "id": "NIT-3",
+      "severity": "NIT",
+      "title": ".gitignore appended block mixes entries with wrapped prose comments",
+      "where": "§5.1 appended .gitignore block",
+      "problem": "The block interleaves real ignore entries with multi-line prose (one comment is wrapped mid-word with a soft hyphen), risking a stray character on copy-paste and spreading the _site/ intent across §5.1/§4/§11.1.",
+      "fix": "Reduce the appended block to the four real entries (.jekyll-cache/, .sass-cache/, .bundle/, vendor/) plus a single short comment; keep the Alternative-B _site/ note in prose only."
+    },
+    {
+      "id": "NIT-4",
+      "severity": "NIT",
+      "title": "OAuth scope=repo broader than least-privilege",
+      "where": "§13.1 step 3",
+      "problem": "scope=repo grants full read/write to all of the user's repos to commit Markdown into one. Justified only as 'works whether or not the repo is private'. For a single public-repo CMS, public_repo is narrower.",
+      "fix": "Decide explicitly: use public_repo if benjaminmanoj/benmanoj is public (narrower), reserving repo for a future private repo; or if repo is already accepted, record the breadth tradeoff explicitly."
+    },
+    {
+      "id": "NIT-5",
+      "severity": "NIT",
+      "title": "Decap CDN URL and version range unverified",
+      "where": "§12.1 (unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js)",
+      "problem": "The @^3.0.0 range in the URL path and the dist/decap-cms.js filename are asserted from convention, not verified; a path-range resolves to latest 3.x and can drift. AC-8 checks config fields but not that the host page actually loads the bundle.",
+      "fix": "Pin a concrete known-good version (decap-cms@3.x.y) instead of a range in the URL and confirm the dist path during implementation; extend AC-8 to assert the host page loads the bundle."
+    }
+  ],
+  "reviewDoc": "/Users/benjaminmanoj/Documents/benmanoj/.worktrees/publish-workflow/.agents/tasks/design-review.md"
+}
