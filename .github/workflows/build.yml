@@ -1,0 +1,29 @@
+name: Build Jekyll site
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '_site/**'          # don't loop on our own build commit
+permissions:
+  contents: write
+concurrency:
+  group: jekyll-build
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Build
+        run: bundle exec jekyll build
+      - name: Commit built site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _site
+          git diff --cached --quiet || git commit -m "ci: rebuild _site"
+          git push
