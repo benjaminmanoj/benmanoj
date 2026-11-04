@@ -1,87 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benjamin Manoj</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <!-- Pencil-stroke texture filter. feTurbulence makes Perlin noise;
-         feDisplacementMap uses it to jitter the text edges so strokes look
-         like graphite dragged across paper instead of crisp vector print. -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <filter id="pencil-texture">
-            <feTurbulence type="fractalNoise" baseFrequency="0.08"
-                          numOctaves="4" seed="7" result="noise"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise"
-                               scale="3"
-                               xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-    </svg>
+---
+layout: notebook
+title_tag: "Benjamin Manoj"
+---
+{% include header.html name="Benjamin Manoj" %}
 
-    <article class="notebook-page">
-        <!-- Single punched hole in the left margin, rendered as the PNG. -->
-        <img class="hole" src="/images/bowl.png" alt="" aria-hidden="true">
+<div class="line-row">
+    <span class="toc-title">Table of Contents</span>
+</div>
+<div class="line-row blank"></div>
 
-        <div class="writing pencil">
-            <!-- Header region: 3 blank rules, then the name resting on the
-                 4th rule (= the first printed blue line at --top-gap). -->
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row">
-                <span class="header-name">Benjamin Manoj</span>
-            </div>
+<nav aria-label="Table of Contents">
+    <div class="line-row toc-item">
+        <a href="/papers/">
+            <span class="toc-label">Papers</span>
+            <span class="toc-leader"></span>
+            <span class="toc-page">1</span>
+        </a>
+    </div>
+    <div class="line-row toc-item">
+        <a href="/writing/">
+            <span class="toc-label">Writing</span>
+            <span class="toc-leader"></span>
+            <span class="toc-page">2</span>
+        </a>
+    </div>
+    <div class="line-row toc-item">
+        <a href="/about/">
+            <span class="toc-label">About</span>
+            <span class="toc-leader"></span>
+            <span class="toc-page">3</span>
+        </a>
+    </div>
+</nav>
 
-            <!-- Table of contents, each entry on its own rule. -->
-            <div class="line-row">
-                <span class="toc-title">Table of Contents</span>
-            </div>
-            <div class="line-row blank"></div>
-
-            <nav aria-label="Table of Contents">
-                <div class="line-row toc-item">
-                    <a href="/papers/">
-                        <span class="toc-label">Papers</span>
-                        <span class="toc-leader"></span>
-                        <span class="toc-page">1</span>
-                    </a>
-                </div>
-                <div class="line-row toc-item">
-                    <a href="/writing/">
-                        <span class="toc-label">Writing</span>
-                        <span class="toc-leader"></span>
-                        <span class="toc-page">2</span>
-                    </a>
-                </div>
-                <div class="line-row toc-item">
-                    <a href="/about/">
-                        <span class="toc-label">About</span>
-                        <span class="toc-leader"></span>
-                        <span class="toc-page">3</span>
-                    </a>
-                </div>
-            </nav>
-
-            <!-- Extra empty ruled rows to extend the page downward. Each adds
-                 one blank line and its rule. Add or remove to taste. -->
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-            <div class="line-row blank"></div>
-        </div>
-    </article>
-</body>
-</html>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>

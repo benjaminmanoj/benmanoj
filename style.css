@@ -230,3 +230,57 @@ body {
         right: 4%;
     }
 }
+
+/* ---------- Flowing Markdown paper body on the ruled grid ---------- */
+/* The body is normal prose, but every line advances exactly one ruled
+   line (line-height: var(--line)) and the whole block is phase-aligned to
+   the rule grid with the SAME translateY(--baseline-drop) mechanism the
+   grid's .line-row children use, so baselines rest on the blue rules as
+   closely as flowing text allows. This is a single block-level
+   approximation, NOT per-line gluing (the accepted tradeoff). */
+.paper-body {
+    font-size: var(--fs-item);
+    line-height: var(--line);
+    /* Same mechanism as `.line-row > *` (transform, not top), same em basis,
+       PLUS half-leading compensation: with line-height:var(--line) the glyphs
+       are centered in a --line-tall line box, so we add (--line - 1em)/2 to the
+       --baseline-drop nudge to land the first baseline ON the rule (not ~0.1*--line
+       above it). 1em == --fs-item here. Tune the constant on the seed paper. */
+    transform: translateY(calc(var(--baseline-drop) + (var(--line) - 1em) / 2));
+}
+
+/* Block elements must not introduce vertical space that is not a whole
+   multiple of --line, or the text would fall off the rules. Collapse
+   default margins and express spacing in whole rules only. */
+.paper-body > *:first-child { margin-top: 0; }
+.paper-body p,
+.paper-body ul,
+.paper-body ol,
+.paper-body blockquote,
+.paper-body pre,
+.paper-body h1,
+.paper-body h2,
+.paper-body h3,
+.paper-body h4 {
+    margin: 0 0 var(--line) 0;   /* one blank rule between blocks */
+    line-height: var(--line);    /* each wrapped line = one rule */
+    font-weight: 400;
+}
+
+/* Headings stay on the grid: keep their line box exactly one rule tall by
+   using a font-size below --line so a single line box still equals one rule. */
+.paper-body h1 { font-size: calc(var(--line) * 0.95); }
+.paper-body h2 { font-size: calc(var(--line) * 0.85); }
+.paper-body h3 { font-size: var(--fs-item); font-weight: 600; }
+
+/* Lists: indent inside the writing column; each item advances one rule. */
+.paper-body ul,
+.paper-body ol { padding-left: 1.2em; }
+.paper-body li { line-height: var(--line); }
+
+/* Inline code / pre: keep metrics on the grid; avoid tall line boxes. */
+.paper-body code { font-family: inherit; }
+.paper-body pre  { white-space: pre-wrap; }
+
+/* Links inherit the ink color like the rest of the notebook. */
+.paper-body a { color: inherit; text-decoration: underline; }
