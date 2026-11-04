@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papers — Benjamin Manoj</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="pencil-texture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.08"
+                          numOctaves="4" seed="7" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise"
+                               scale="3"
+                               xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <article class="notebook-page">
+        <img class="hole" src="/images/bowl.png" alt="" aria-hidden="true">
+
+        <div class="writing pencil">
+            <div class="line-row blank"></div>
+            <div class="line-row blank"></div>
+            <div class="line-row blank"></div>
+            <div class="line-row">
+                <span class="header-name">Papers</span>
+            </div>
+
+            <div class="line-row blank"></div>
+            <div class="line-row toc-item">
+                <a class="back-link" href="/">&larr; Contents</a>
+            </div>
+            <div class="line-row blank"></div>
+
+            <div class="line-row"><span class="body-line">A first paper.</span></div>
+            <div class="line-row"><span class="body-line">A second paper.</span></div>
+            <div class="line-row"><span class="body-line">A third paper.</span></div>
+            <div class="line-row blank"></div>
+            <div class="line-row"><span class="body-line">More notes continue down the page,</span></div>
+            <div class="line-row"><span class="body-line">and the ruled lines follow the text</span></div>
+            <div class="line-row"><span class="body-line">all the way to the bottom, growing</span></div>
+            <div class="line-row"><span class="body-line">as far as the content runs.</span></div>
+        </div>
+    </article>
+</body>
+</html>

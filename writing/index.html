@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Benjamin Manoj</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="pencil-texture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.08"
+                          numOctaves="4" seed="7" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise"
+                               scale="3"
+                               xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <article class="notebook-page">
+        <img class="hole" src="/images/bowl.png" alt="" aria-hidden="true">
+
+        <div class="writing pencil">
+            <div class="line-row blank"></div>
+            <div class="line-row blank"></div>
+            <div class="line-row blank"></div>
+            <div class="line-row">
+                <span class="header-name">Writing</span>
+            </div>
+
+            <div class="line-row blank"></div>
+            <div class="line-row toc-item">
+                <a class="back-link" href="/">&larr; Contents</a>
+            </div>
+            <div class="line-row blank"></div>
+
+            <div class="line-row"><span class="body-line">A first piece of writing.</span></div>
+            <div class="line-row"><span class="body-line">A second piece of writing.</span></div>
+            <div class="line-row"><span class="body-line">A third piece of writing.</span></div>
+            <div class="line-row blank"></div>
+            <div class="line-row"><span class="body-line">The lines keep going down the page</span></div>
+            <div class="line-row"><span class="body-line">as the writing runs on, following</span></div>
+            <div class="line-row"><span class="body-line">the text all the way to the bottom.</span></div>
+        </div>
+    </article>
+</body>
+</html>
