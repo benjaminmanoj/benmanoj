@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Example Paper — Benjamin Manoj</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="pencil-texture">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08"
+                      numOctaves="4" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise"
+                           scale="3"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+</svg>
+
+
+    <article class="notebook-page">
+        <img class="hole" src="/images/bowl.png" alt="" aria-hidden="true">
+
+
+        <div class="writing pencil">
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row blank"></div>
+<div class="line-row">
+    <span class="header-name">An Example Paper</span>
+</div>
+
+
+<div class="line-row blank"></div>
+<div class="line-row toc-item">
+    <a class="back-link" href="/papers/">&larr; Contents</a>
+</div>
+<div class="line-row blank"></div>
+
+<div class="paper-body">
+<p>This is an example paper that demonstrates how prose flows onto the ruled
+notebook grid. Paragraphs, headings, and lists all advance one ruled line at
+a time so the writing rests on the blue rules.</p>
+
+<h2 id="a-section-heading">A Section Heading</h2>
+
+<p>A short list to exercise the paper-body styling:</p>
+
+<ul>
+  <li>The first point worth noting.</li>
+  <li>A second point that follows on.</li>
+</ul>
+
+</div>
+
+        </div>
+    </article>
+</body>
+</html>
