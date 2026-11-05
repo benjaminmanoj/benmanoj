@@ -1,0 +1,286 @@
+/* ===================================================================
+   Shared styles for every notebook page (home + sub-pages).
+   Asset URLs are ROOT-relative (leading /) so they resolve correctly
+   from any directory depth, e.g. /papers/ as well as /.
+   =================================================================== */
+
+/* Local handwritten font supplied in the project. */
+@font-face {
+    font-family: 'Crayonia';
+    src: url('/fonts/Crayonia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ========================================================
+       ONE SCALING UNIT DRIVES EVERYTHING.
+       --line is the height of a single ruled row. It scales
+       SMOOTHLY with the viewport (clamp, no media-query jumps),
+       responding on both axes via a vw + vh blend. Rule spacing,
+       every font size, the header height and the baseline are all
+       expressed as ratios of --line, so text and lines are locked
+       together and move as one when the screen resizes.
+       ======================================================== */
+    --line: clamp(2.6rem, 3.2vw + 2.4vh, 5.6rem);
+
+    /* Font sizes as fixed FRACTIONS of the line height. */
+    --fs-name:  calc(var(--line) * 2);
+    --fs-title: calc(var(--line) * 0.8);
+    --fs-item:  calc(var(--line) * 0.8);
+
+    /* Horizontal offset of the red vertical margin line. */
+    --margin-x: clamp(12%, 10vw, 15%);
+    /* Blank header region: a whole number of rules keeps the grid aligned. */
+    --top-gap: calc(var(--line) * 4);
+    /* Baseline drop: pushes text down so the baseline rests on the rule. */
+    --baseline-drop: 0.22em;
+
+    --blue-rule: #a9c6e8;
+    --red-margin: #e8837c;
+    --ink: #3a3a3c;
+}
+
+body {
+    font-family: 'Crayonia', 'Segoe Print', cursive;
+    background-color: #fdfdfb;
+    color: var(--ink);
+}
+
+/* ---------- Pencil-graphite stroke texture ---------- */
+.pencil {
+    filter: url(#pencil-texture);
+    text-shadow:
+        0 0 0.3px rgba(58, 58, 60, 0.5),
+        0.3px 0.2px 0.4px rgba(40, 40, 42, 0.35),
+        -0.2px 0.1px 0.3px rgba(70, 70, 72, 0.25);
+}
+
+/* ---------- The notebook page fills the whole viewport ---------- */
+.notebook-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fdfdfb;
+    background-image:
+        linear-gradient(#fdfdfb, #fdfdfb),
+        repeating-linear-gradient(
+            to bottom,
+            var(--blue-rule) 0,
+            var(--blue-rule) 1px,
+            transparent 1px,
+            transparent var(--line)
+        );
+    background-position:
+        0 0,
+        0 var(--top-gap);
+    background-size:
+        100% var(--top-gap),
+        100% var(--line);
+    background-repeat:
+        no-repeat,
+        repeat-y;
+}
+
+/* Red vertical margin line. */
+.notebook-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--margin-x);
+    width: 1.5px;
+    background-color: var(--red-margin);
+    opacity: 0.85;
+}
+
+/* ---------- The uploaded PNG, placed in the upper-left box ---------- */
+.hole {
+    --hole-d: calc(var(--line) * 1.5);
+    position: absolute;
+    top: calc(var(--top-gap) * 0.5);
+    left: calc(var(--margin-x) * 0.5);
+    transform: translate(-50%, -50%);
+    width: var(--hole-d);
+    height: auto;
+    object-fit: contain;
+    z-index: 4;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ---------- The writing grid ----------
+   In NORMAL DOCUMENT FLOW (not absolutely positioned) so the content gives
+   the page its height: as rows are added, .notebook-page grows, and because
+   the ruled-line background is a repeat-y gradient tied to --line, the rules
+   automatically continue down the full grown height. The writing column sits
+   between the red margin line (left) and a right inset, matching the old
+   absolute offsets but expressed as margins so the box still contributes
+   height. A trailing padding adds a few blank ruled lines after the content
+   so the page never ends flush on the last line of text. */
+.writing {
+    position: relative;
+    z-index: 1;
+    /* Left edge aligns just past the red margin line; right inset matches. */
+    margin-left: var(--margin-x);
+    margin-right: 6%;
+    padding-left: 1.2rem;
+    /* Guarantee at least a full screen of paper even when content is short. */
+    min-height: 100vh;
+    /* A little breathing room of blank rules below the last line. */
+    padding-bottom: calc(var(--line) * 3);
+}
+
+.line-row {
+    display: flex;
+    align-items: flex-end;
+    height: var(--line);
+    overflow: visible;
+}
+
+.line-row > * {
+    transform: translateY(var(--baseline-drop));
+}
+
+.line-row.blank {
+    /* nothing inside; just advances one rule */
+}
+
+/* The name / page title, written on the last rule of the header region. */
+.header-name {
+    font-size: var(--fs-name);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* ---------- Table of contents / body rows ---------- */
+.toc-title {
+    font-size: var(--fs-title);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    opacity: 0.9;
+}
+
+.toc-item {
+    font-size: var(--fs-item);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.toc-item a {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    line-height: 1;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.toc-item a:hover {
+    color: #1f1f21;
+}
+
+.toc-label {
+    white-space: nowrap;
+}
+
+.toc-leader {
+    flex: 1;
+}
+
+.toc-page {
+    white-space: nowrap;
+    opacity: 0.75;
+}
+
+/* A plain body line of writing (used on sub-pages). */
+.body-line {
+    font-size: var(--fs-item);
+    line-height: 1;
+}
+
+/* "Back to contents" link on sub-pages. */
+.back-link {
+    font-size: var(--fs-item);
+    line-height: 1;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.back-link:hover {
+    opacity: 1;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    .writing {
+        right: 4%;
+    }
+}
+
+/* ---------- Flowing Markdown paper body on the ruled grid ---------- */
+/* The body is normal prose, but every line advances exactly one ruled
+   line (line-height: var(--line)) and the whole block is phase-aligned to
+   the rule grid with the SAME translateY(--baseline-drop) mechanism the
+   grid's .line-row children use, so baselines rest on the blue rules as
+   closely as flowing text allows. This is a single block-level
+   approximation, NOT per-line gluing (the accepted tradeoff). */
+.paper-body {
+    font-size: var(--fs-item);
+    line-height: var(--line);
+    /* Same mechanism as `.line-row > *` (transform, not top), same em basis,
+       PLUS half-leading compensation: with line-height:var(--line) the glyphs
+       are centered in a --line-tall line box, so we add (--line - 1em)/2 to the
+       --baseline-drop nudge to land the first baseline ON the rule (not ~0.1*--line
+       above it). 1em == --fs-item here. Tune the constant on the seed paper. */
+    transform: translateY(calc(var(--baseline-drop) + (var(--line) - 1em) / 2));
+}
+
+/* Block elements must not introduce vertical space that is not a whole
+   multiple of --line, or the text would fall off the rules. Collapse
+   default margins and express spacing in whole rules only. */
+.paper-body > *:first-child { margin-top: 0; }
+.paper-body p,
+.paper-body ul,
+.paper-body ol,
+.paper-body blockquote,
+.paper-body pre,
+.paper-body h1,
+.paper-body h2,
+.paper-body h3,
+.paper-body h4 {
+    margin: 0 0 var(--line) 0;   /* one blank rule between blocks */
+    line-height: var(--line);    /* each wrapped line = one rule */
+    font-weight: 400;
+}
+
+/* Headings stay on the grid: keep their line box exactly one rule tall by
+   using a font-size below --line so a single line box still equals one rule. */
+.paper-body h1 { font-size: calc(var(--line) * 0.95); }
+.paper-body h2 { font-size: calc(var(--line) * 0.85); }
+.paper-body h3 { font-size: var(--fs-item); font-weight: 600; }
+
+/* Lists: indent inside the writing column; each item advances one rule. */
+.paper-body ul,
+.paper-body ol { padding-left: 1.2em; }
+.paper-body li { line-height: var(--line); }
+
+/* Inline code / pre: keep metrics on the grid; avoid tall line boxes. */
+.paper-body code { font-family: inherit; }
+.paper-body pre  { white-space: pre-wrap; }
+
+/* Links inherit the ink color like the rest of the notebook. */
+.paper-body a { color: inherit; text-decoration: underline; }

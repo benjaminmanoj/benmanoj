@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# macOS
+.DS_Store
+
+# --- Jekyll / Bundler (appended for this project) ---
+.jekyll-cache/
+.sass-cache/
+.bundle/
+vendor/
+# _site/ is produced by the GitHub Actions build and committed by CI post-push
+# (primary path). It is NOT committed by this workflow and NOT ignored here, so
+# that CI can add it. Under Alternative B (Vercel runs Ruby) add `_site/` to
+# this list instead, since nothing should commit it.

@@ -1,0 +1,40 @@
+# Site
+title: "Benjamin Manoj"
+url: "https://www.benmanoj.com"
+
+# Build
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Collections — papers
+collections:
+  papers:
+    output: true                 # each paper gets its own page/URL
+    permalink: /papers/:name/    # /papers/<date-slug>/  (see note)
+
+# Defaults: every paper uses the paper layout. Title composition lives in the
+# base notebook layout's conditional (§6.4/§6.8), so NO title_tag default here.
+defaults:
+  - scope:
+      path: ""
+      type: papers
+    values:
+      layout: paper
+
+# Keep source/control files out of the built _site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vercel.json
+  - package.json
+  - README.md
+  - LICENSE
+  - PUBLISHING.md
+  - node_modules
+  - public            # EULA + font file + unused image; not part of the deployed site
+  - api               # served by Vercel as functions from repo root, NOT via Jekyll
+  - .agents
+  - .worktrees
+  - .github

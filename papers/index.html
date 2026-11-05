@@ -1,0 +1,18 @@
+---
+layout: page
+title_tag: "Papers — Benjamin Manoj"
+heading: "Papers"
+---
+{% assign sorted = site.papers | sort: "date" | reverse %}
+{% for paper in sorted %}
+<div class="line-row toc-item">
+    <a href="{{ paper.url }}">
+        <span class="toc-label">{{ paper.title }}</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">{{ paper.date | date: "%Y" }}</span>
+    </a>
+</div>
+{% endfor %}
+{% if sorted.size == 0 %}
+<div class="line-row"><span class="body-line">No papers yet.</span></div>
+{% endif %}

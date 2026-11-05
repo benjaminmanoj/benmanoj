@@ -1,0 +1,12 @@
+{
+  "buildCommand": "",
+  "outputDirectory": "_site",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "benmanoj.com" }],
+      "destination": "https://www.benmanoj.com/$1",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "benmanoj-oauth",
+  "private": true,
+  "type": "commonjs",
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,7 @@
+{
+  "task_id": "task-publish-workflow",
+  "task_description": "Move the hand-written benmanoj.com notebook site from benmanoj.com/ into the worktree repo root, convert it into a minimal Jekyll build that reproduces the existing markup/classes identically, add a _papers collection with an auto-listing index and a paper layout, and wire a browser write-and-publish loop (Decap CMS at /admin + Vercel serverless GitHub OAuth at /api) plus the CI/Vercel build config and PUBLISHING.md. All work stays local on branch publish-workflow; nothing is pushed.",
+  "status": "completed",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}
