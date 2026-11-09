@@ -10,7 +10,30 @@
     src: url('/fonts/EidolonScript.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    /* `block` keeps text INVISIBLE (no fallback-font flash) while Eidolon
+       loads, instead of `swap` which shows a backup font first. The browser's
+       block period is short and capped, so text can never hang forever. */
+    font-display: block;
+}
+
+/* ---------- Graceful "opening a journal page" reveal ----------
+   The whole page starts transparent and fades in only once the real font is
+   confirmed loaded (class added by the inline script in the layout). If JS is
+   off or the font API is unavailable, a fallback keyframe reveals the page
+   after a short delay so content is never stuck hidden. */
+body {
+    opacity: 0;
+}
+
+html.fonts-loaded body {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+/* Safety net: if .fonts-loaded is never set (no JS / API), reveal anyway. */
+@keyframes reveal-fallback { to { opacity: 1; } }
+html:not(.fonts-loaded) body {
+    animation: reveal-fallback 0s linear 2s forwards;
 }
 
 * {
