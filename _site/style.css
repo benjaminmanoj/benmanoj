@@ -6,8 +6,8 @@
 
 /* Local handwritten font supplied in the project. */
 @font-face {
-    font-family: 'Eidolon Script';
-    src: url('/fonts/EidolonScript.ttf') format('truetype');
+    font-family: 'Rudiment';
+    src: url('/fonts/Rudiment.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     /* `block` keeps text INVISIBLE (no fallback-font flash) while Eidolon
@@ -72,7 +72,7 @@ html:not(.fonts-loaded) body {
 }
 
 body {
-    font-family: 'Eidolon Script', 'Segoe Print', cursive;
+    font-family: 'Rudiment', 'Segoe Print', cursive;
     background-color: #fdfdfb;
     color: var(--ink);
 }
