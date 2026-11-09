@@ -54,8 +54,21 @@ body {
     color: var(--ink);
 }
 
-/* ---------- Pencil-graphite stroke texture ---------- */
-.pencil {
+/* ---------- Pencil-graphite stroke texture ----------
+   Apply the SVG displacement filter to the SHORT text elements only, never to
+   the whole .writing block. A filter on the whole block creates a filter
+   region that clips/displaces long flowing prose (.paper-body) so it renders
+   invisible while staying selectable. Targeting the short rows keeps the
+   pencil look on the name/TOC/headings and leaves body prose paintable. */
+.pencil .header-name,
+.pencil .toc-title,
+.pencil .toc-item,
+.pencil .body-line,
+.pencil .back-link,
+.pencil .paper-body h1,
+.pencil .paper-body h2,
+.pencil .paper-body h3,
+.pencil .paper-body h4 {
     filter: url(#pencil-texture);
     text-shadow:
         0 0 0.3px rgba(58, 58, 60, 0.5),
