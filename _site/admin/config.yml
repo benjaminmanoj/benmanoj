@@ -5,11 +5,10 @@ backend:
   base_url: https://www.benmanoj.com   # our Vercel-hosted OAuth endpoints live here
   auth_endpoint: api/auth              # -> https://www.benmanoj.com/api/auth
 
-# No media_folder/public_folder (resolves Finding 6): papers are text/Markdown
-# only, and image uploads are explicitly out of scope (§16). Declaring a media
-# folder would half-wire an untested upload-to-main path. If media is wanted
-# later, add media_folder: "images/uploads" + public_folder: "/images/uploads",
-# create images/uploads/.gitkeep, and add an acceptance check.
+# Decap requires a media config to start. Images you add through the CMS are
+# committed here and served from the root-relative public path.
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "papers"
