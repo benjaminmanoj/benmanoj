@@ -6,8 +6,8 @@
 
 /* Local handwritten font supplied in the project. */
 @font-face {
-    font-family: 'Rabiohead';
-    src: url('/fonts/Rabiohead.ttf') format('truetype');
+    font-family: 'Conformity';
+    src: url('/fonts/Conformity.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     /* `block` keeps text INVISIBLE (no fallback-font flash) while Eidolon
@@ -72,7 +72,7 @@ html:not(.fonts-loaded) body {
 }
 
 body {
-    font-family: 'Rabiohead', 'Segoe Print', cursive;
+    font-family: 'Conformity', 'Segoe Print', cursive;
     background-color: #fdfdfb;
     color: var(--ink);
 }
