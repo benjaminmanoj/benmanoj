@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benjamin Manoj</title>
+    <!-- Start fetching the font immediately so it's ready sooner. -->
+    <link rel="preload" href="/fonts/EidolonScript.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="/style.css">
+    <!-- Reveal the page only once the real font is loaded, for a graceful
+         fade-in with no fallback-font flash. Runs inline (no extra request).
+         Falls back to revealing after the font API settles or on error. -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        function reveal() { root.classList.add('fonts-loaded'); }
+        if (document.fonts && document.fonts.load) {
+          // Ask specifically for Eidolon Script, then reveal when ready.
+          Promise.all([
+            document.fonts.load('1em "Eidolon Script"')
+          ]).then(function () {
+            return document.fonts.ready;
+          }).then(reveal).catch(reveal);
+          // Hard safety cap: never stay hidden more than 3s.
+          setTimeout(reveal, 3000);
+        } else {
+          reveal();
+        }
+      })();
+    </script>
 </head>
 <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
