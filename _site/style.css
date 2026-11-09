@@ -6,8 +6,8 @@
 
 /* Local handwritten font supplied in the project. */
 @font-face {
-    font-family: 'Crayonia';
-    src: url('/fonts/Crayonia.ttf') format('truetype');
+    font-family: 'Eidolon Script';
+    src: url('/fonts/EidolonScript.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -49,7 +49,7 @@
 }
 
 body {
-    font-family: 'Crayonia', 'Segoe Print', cursive;
+    font-family: 'Eidolon Script', 'Segoe Print', cursive;
     background-color: #fdfdfb;
     color: var(--ink);
 }
