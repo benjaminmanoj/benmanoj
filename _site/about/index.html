@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Benjamin Manoj</title>
     <!-- Start fetching the font immediately so it's ready sooner. -->
-    <link rel="preload" href="/fonts/Rudiment.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Rabiohead.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="/style.css">
     <!-- Reveal the page only once the real font is loaded, for a graceful
          fade-in with no fallback-font flash. Runs inline (no extra request).
@@ -17,7 +17,7 @@
         if (document.fonts && document.fonts.load) {
           // Ask specifically for Eidolon Script, then reveal when ready.
           Promise.all([
-            document.fonts.load('1em "Rudiment"')
+            document.fonts.load('1em "Rabiohead"')
           ]).then(function () {
             return document.fonts.ready;
           }).then(reveal).catch(reveal);
