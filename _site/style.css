@@ -64,8 +64,10 @@ html:not(.fonts-loaded) body {
     --margin-x: clamp(12%, 10vw, 15%);
     /* Blank header region: a whole number of rules keeps the grid aligned. */
     --top-gap: calc(var(--line) * 4);
-    /* Baseline drop: pushes text down so the baseline rests on the rule. */
-    --baseline-drop: 0.22em;
+    /* Baseline drop: pushes text down so the baseline rests on the rule.
+       Kept modest so deep descenders (j, g, y) are not shoved below the row
+       and clipped by the next line. */
+    --baseline-drop: 0.08em;
 
     --blue-rule: #a9c6e8;
     --red-margin: #e8837c;
@@ -195,7 +197,9 @@ body {
     font-size: var(--fs-name);
     font-weight: 600;
     letter-spacing: 0.01em;
-    line-height: 1;
+    /* `normal` (not 1) so the line box includes the font's full descender
+       space — otherwise deep tails on j/g/y get clipped at the row edge. */
+    line-height: normal;
     white-space: nowrap;
 }
 
@@ -204,21 +208,21 @@ body {
     font-size: var(--fs-title);
     font-weight: 500;
     letter-spacing: 0.01em;
-    line-height: 1;
+    line-height: normal;
     opacity: 0.9;
 }
 
 .toc-item {
     font-size: var(--fs-item);
     font-weight: 400;
-    line-height: 1;
+    line-height: normal;
 }
 
 .toc-item a {
     display: flex;
     align-items: flex-end;
     width: 100%;
-    line-height: 1;
+    line-height: normal;
     color: inherit;
     text-decoration: none;
     transition: color 0.2s ease;
@@ -244,13 +248,13 @@ body {
 /* A plain body line of writing (used on sub-pages). */
 .body-line {
     font-size: var(--fs-item);
-    line-height: 1;
+    line-height: normal;
 }
 
 /* "Back to contents" link on sub-pages. */
 .back-link {
     font-size: var(--fs-item);
-    line-height: 1;
+    line-height: normal;
     color: inherit;
     text-decoration: none;
     opacity: 0.75;
