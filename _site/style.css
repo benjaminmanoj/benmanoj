@@ -55,7 +55,8 @@ html:not(.fonts-loaded) body {
     --line: clamp(2.6rem, 3.2vw + 2.4vh, 5.6rem);
 
     /* Font sizes as fixed FRACTIONS of the line height. */
-    --fs-name:  calc(var(--line) * 2);
+    /* Name, title, and contents all share the contents size. */
+    --fs-name:  calc(var(--line) * 0.8);
     --fs-title: calc(var(--line) * 0.8);
     --fs-item:  calc(var(--line) * 0.8);
 
