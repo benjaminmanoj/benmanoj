@@ -94,12 +94,6 @@ body {
 .pencil .paper-body h3,
 .pencil .paper-body h4 {
     filter: url(#pencil-texture);
-    /* Safari clips SVG-filtered descenders even with a wide filter region.
-       Give the element real box space BELOW the glyphs (padding-bottom) so
-       Safari has somewhere to paint the tails, then cancel that space with an
-       equal negative margin so layout/position is UNCHANGED. */
-    padding-bottom: 0.3em;
-    margin-bottom: -0.3em;
     text-shadow:
         0 0 0.3px rgba(58, 58, 60, 0.5),
         0.3px 0.2px 0.4px rgba(40, 40, 42, 0.35),
