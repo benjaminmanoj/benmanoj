@@ -79,11 +79,11 @@ body {
 }
 
 /* ---------- Pencil-graphite stroke texture ----------
-   Apply the SVG displacement filter to the SHORT text elements only, never to
-   the whole .writing block. A filter on the whole block creates a filter
-   region that clips/displaces long flowing prose (.paper-body) so it renders
-   invisible while staying selectable. Targeting the short rows keeps the
-   pencil look on the name/TOC/headings and leaves body prose paintable. */
+   The SVG displacement filter was dropped: it clipped descenders (j/g/y/p) on
+   the filtered short rows (name/TOC/headings), while the essay body — which
+   never had the filter — rendered correctly. To make ALL text render the same
+   (no clipping), we no longer apply the filter to any text. Only the subtle
+   pencil-like text-shadow remains, which doesn't clip anything. */
 .pencil .header-name,
 .pencil .toc-title,
 .pencil .toc-item,
@@ -93,7 +93,6 @@ body {
 .pencil .paper-body h2,
 .pencil .paper-body h3,
 .pencil .paper-body h4 {
-    filter: url(#pencil-texture);
     text-shadow:
         0 0 0.3px rgba(58, 58, 60, 0.5),
         0.3px 0.2px 0.4px rgba(40, 40, 42, 0.35),
