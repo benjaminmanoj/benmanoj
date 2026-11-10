@@ -135,18 +135,18 @@ body {
    covers the text. Technique: SVG feTurbulence noise as a CSS background.
    (Refs: css-tricks grainy gradients, believemy feTurbulence — rephrased.) */
 .paper-grain {
-    content: "";
     position: fixed;
     inset: 0;
-    z-index: 0;
+    /* ON TOP of everything so no opaque background can hide it. It is purely
+       decorative: pointer-events:none lets all clicks pass through, and the
+       low opacity keeps the text fully readable through the grain. */
+    z-index: 9999;
     pointer-events: none;
-    /* No blend mode (multiply against near-white paper was effectively
-       invisible). Instead the SVG itself paints DARK specks with real alpha on
-       a transparent background, so the grain shows as actual pixels over the
-       paper. feColorMatrix maps the fractal noise into a dark, semi-opaque
-       speckle: the last matrix row drives alpha from the noise luminance. */
-    opacity: 1;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.23 0 0 0 0 0.21 0 0 0 0 0.18 0 0 0 0.85 -0.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    opacity: 0.45;
+    /* The SVG paints dark specks with real alpha on a transparent background
+       (feColorMatrix drives alpha from the fractal-noise luminance), so the
+       grain is actual visible pixels regardless of blend mode or stacking. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.18 0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0.9 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
     background-size: 200px 200px;
     background-repeat: repeat;
 }
