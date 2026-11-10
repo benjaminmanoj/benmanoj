@@ -137,17 +137,20 @@ body {
 .paper-grain {
     position: fixed;
     inset: 0;
-    /* ON TOP of everything so no opaque background can hide it. It is purely
-       decorative: pointer-events:none lets all clicks pass through, and the
-       low opacity keeps the text fully readable through the grain. */
+    /* Overlaid on top so no opaque background can hide it (the original issue).
+       pointer-events:none keeps it decorative. */
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.45;
-    /* The SVG paints dark specks with real alpha on a transparent background
-       (feColorMatrix drives alpha from the fractal-noise luminance), so the
-       grain is actual visible pixels regardless of blend mode or stacking. */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.18 0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0.9 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
+    /* ---- Original web-derived "handmade paper" recipe ----
+       SVG feTurbulence with type=fractalNoise (the soft, paper-like grain, not
+       the sharp smoke/marble of type=turbulence), high baseFrequency for fine
+       fibre, desaturated to grey, applied at low opacity with multiply so it
+       darkens INTO the paper like fibres catching light rather than a grey
+       film. Inlined as a data URI => no image request, crisp at any size.
+       Refs: css-tricks grainy gradients, believemy feTurbulence (rephrased). */
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
     background-repeat: repeat;
 }
 
