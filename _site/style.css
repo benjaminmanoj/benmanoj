@@ -125,6 +125,27 @@ body {
         repeat-y;
 }
 
+/* ---------- Matte paper-grain texture ----------
+   A subtle fractal-noise overlay that makes the flat background read like real
+   textured paper. The noise is an inlined SVG feTurbulence (type=fractalNoise
+   = soft, paper-like grain) as a data URI, so there is NO image request. It's a
+   fixed full-viewport layer at low opacity, multiplied into the paper so it
+   behaves like fibres catching light rather than a grey film. pointer-events
+   none and a low z-index keep it purely decorative — it never blocks clicks or
+   covers the text. Technique: SVG feTurbulence noise as a CSS background.
+   (Refs: css-tricks grainy gradients, believemy feTurbulence — rephrased.) */
+.paper-grain {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
+
 /* Red vertical margin line. */
 .notebook-page::before {
     content: "";
